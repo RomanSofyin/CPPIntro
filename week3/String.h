@@ -1,6 +1,7 @@
 #include <cstddef> // size_t
 #include <cstring> // strlen, strcpy
 
+
 #pragma once
 
 
@@ -10,7 +11,7 @@ struct String {
 	char *str;
 	
 	String(const char *str = "") : size(strlen(str)), str(new char[size + 1]) {
-		strcpy(this->str, str);
+		strcpy_s(this->str, this->size+1, str);
 		this->str[size] = '\0';
 	}
 
@@ -28,7 +29,15 @@ struct String {
 	}
 
 	void append(String &other) {
+		char * newStr = new char[this->size + other.size + 1];
+		strcpy_s(newStr, this->size + other.size + 1, this->str);
+		strcpy_s(newStr+this->size, other.size + 1, other.str);
+		newStr[this->size + other.size] = '\0';
 
+		delete[] this->str;
+
+		this->str = newStr;
+		this->size += other.size;
 	}
 
 };
