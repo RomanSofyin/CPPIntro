@@ -24,6 +24,12 @@
     <ClInclude Include="String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Cls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClsClone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
