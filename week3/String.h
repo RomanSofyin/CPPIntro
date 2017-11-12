@@ -1,5 +1,6 @@
 #include <cstddef> // size_t
 #include <cstring> // strlen, strcpy
+#include <algorithm>
 
 
 #pragma once
@@ -12,7 +13,6 @@ struct String {
 	
 	String(const char *str = "") : size(strlen(str)), str(new char[size + 1]) {
 		strcpy_s(this->str, this->size+1, str);
-		this->str[size] = '\0';
 	}
 
 	// Make sure that the size and str struct fields defined in this order.
@@ -23,16 +23,26 @@ struct String {
 		str[n] = '\0';
 	}
 
+	String(const String &other) : size(other.size), str(new char[size+1]) {
+			strcpy_s(this->str, size + 1, other.str);
+	}
+
 	~String() {
 		delete[] str;
 		size = 0;
 	}
 
+	String &operator=(const String &other) {
+		if (this != &other)
+			String(other).swap(*this);
+		return *this;
+	}
+
+	
 	void append(String &other) {
 		char * newStr = new char[this->size + other.size + 1];
 		strcpy_s(newStr, this->size + other.size + 1, this->str);
 		strcpy_s(newStr+this->size, other.size + 1, other.str);
-		newStr[this->size + other.size] = '\0';
 
 		delete[] this->str;
 
@@ -40,4 +50,9 @@ struct String {
 		this->size += other.size;
 	}
 
+private:
+	void swap(String & string) {
+		std::swap(size, string.size);
+		std::swap(str, string.str);
+	}
 };
