@@ -50,7 +50,6 @@ struct String {
 		this->size += other.size;
 	}
 
-private:
 	void swap(String & string) {
 		std::swap(size, string.size);
 		std::swap(str, string.str);
