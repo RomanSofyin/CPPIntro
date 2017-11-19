@@ -2,7 +2,8 @@
 
 struct Expression
 {
-	double evaluate() const = 0;
+	virtual double evaluate() const = 0;
+	virtual ~Expression() {}
 };
 
 struct Number : Expression
@@ -11,6 +12,14 @@ struct Number : Expression
 		: value(value)
 	{}
 
+	virtual void bla() const {}
+
+	double evaluate() const {
+		// we can call virtual methods from non-virtual ones
+		bla();
+		return value;
+	}
+	
 private:
 	double value;
 };
@@ -24,6 +33,34 @@ struct BinaryOperation : Expression
 	BinaryOperation(Expression const * left, char op, Expression const * right)
 		: left(left), op(op), right(right)
 	{ }
+
+	~BinaryOperation() {
+		delete left;
+		delete right;
+	}
+
+	double evaluate() const {
+		double res = 0;
+
+		switch (op)
+		{
+		case '+':
+			res = left->evaluate() + right->evaluate();
+			break;
+		case '-':
+			res = left->evaluate() - right->evaluate();
+			break;
+		case '*':
+			res = left->evaluate() * right->evaluate();
+			break;
+		case '/':
+			res = left->evaluate() / right->evaluate();
+			break;
+		default:
+			break;
+		}
+		return res;
+	}
 
 private:
 	Expression const * left;
