@@ -1,6 +1,6 @@
-#include <iostream>
-
 #pragma once
+
+
 
 struct Foo {
 	void say() const { 
