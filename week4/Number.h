@@ -17,9 +17,6 @@ struct Number : Expression
 		return value;
 	}
 
-	void visit(Visitor * visitor) const {
-		return;
-	}
 
 
 	~Number() {

@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include "Expression.h"
 
 struct BinaryOperation : Expression
 {
@@ -36,9 +36,6 @@ struct BinaryOperation : Expression
 		return res;
 	}
 
-	void visit(Visitor * visitor) const {
-		return;
-	}
 
 
 private:
