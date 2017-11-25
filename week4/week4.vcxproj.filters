@@ -39,9 +39,6 @@
     <ClInclude Include="PrintVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AllInOne.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

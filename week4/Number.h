@@ -1,6 +1,7 @@
 #pragma once
 
-
+#include "Expression.h"
+//#include "Visitor.h"
 
 struct Number : Expression
 {
@@ -8,7 +9,7 @@ struct Number : Expression
 		: value(value)
 	{}
 
-	virtual void bla() const { int b = 4; return; }
+	virtual void bla() const {}
 
 	double evaluate() const {
 		// we can call virtual methods from non-virtual ones
@@ -16,9 +17,11 @@ struct Number : Expression
 		return value;
 	}
 
-	void visit(Visitor * v) const {
+	//void visit(Visitor * v) const {
+	//	v->visitNumber(this);
+	//}
 
-	}
+	double get_value() const { return value; }
 	
 private:
 	double value;
