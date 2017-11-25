@@ -1,9 +1,13 @@
 #pragma once
 
-#include "Expression.h"
 
 struct BinaryOperation : Expression
 {
+	void visit(Visitor * v) const {
+
+	}
+
+
 	BinaryOperation(Expression const * left, char op, Expression const * right)
 		: left(left), op(op), right(right)
 	{}
@@ -35,7 +39,6 @@ struct BinaryOperation : Expression
 		}
 		return res;
 	}
-
 
 
 private:

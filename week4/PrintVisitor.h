@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Visitor.h"
 
 struct PrintVisitor : Visitor
 {

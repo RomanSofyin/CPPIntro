@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Expression.h"
 
 
 struct Number : Expression
@@ -17,13 +16,10 @@ struct Number : Expression
 		return value;
 	}
 
+	void visit(Visitor * v) const {
 
-
-	~Number() {
-		value = 0;
 	}
-
-
+	
 private:
 	double value;
 };

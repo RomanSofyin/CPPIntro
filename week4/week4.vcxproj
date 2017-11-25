@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AllInOne.h" />
     <ClInclude Include="BinaryOperation.h" />
     <ClInclude Include="Expression.h" />
     <ClInclude Include="Foo.h" />
