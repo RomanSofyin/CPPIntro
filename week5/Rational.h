@@ -23,6 +23,8 @@ struct Rational
 
 	Rational operator+() const;
 	Rational operator-() const;
+
+	operator double() const;
 	
 private:
 	int numerator_;

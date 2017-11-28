@@ -101,3 +101,7 @@ Rational Rational::operator-() const {
 	r.neg();
 	return r;
 }
+
+Rational::operator double() const {
+	return to_double();
+}
