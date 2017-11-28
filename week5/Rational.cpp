@@ -24,6 +24,14 @@ int Rational::lcm(int a, int b) {
 
 Rational::Rational(int numerator, int denominator) : numerator_(numerator), denominator_(denominator) {}
 
+int Rational::getNumerator() const {
+	return numerator_;
+}
+
+int Rational::getDenomenator() const {
+	return denominator_;
+}
+
 void Rational::add(Rational rational) {
 	int denLcm = lcm(denominator_, rational.denominator_);
 	numerator_ = numerator_*(denLcm / denominator_) + rational.numerator_*(denLcm / denominator_);
@@ -58,6 +66,10 @@ void Rational::inv() {
 
 double Rational::to_double() const {
 	return numerator_ / denominator_;
+}
+
+bool Rational::isZero() const {
+	return numerator_ == 0;
 }
 
 Rational & Rational::operator+=(Rational const & r) {
