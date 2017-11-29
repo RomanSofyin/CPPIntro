@@ -105,3 +105,44 @@ Rational Rational::operator-() const {
 Rational::operator double() const {
 	return to_double();
 }
+
+Rational operator+(Rational r1, Rational const & r2) {
+	return r1 += r2;
+}
+
+Rational operator-(Rational r1, Rational const & r2) {
+	return r1 -= r2;
+}
+
+Rational operator*(Rational r1, Rational const & r2) {
+	return r1 *= r2;
+}
+
+Rational operator/(Rational r1, Rational const & r2) {
+	return r1 /= r2;
+}
+
+bool operator==(Rational const & r1, Rational const & r2) {
+	bool res = r1.getNumerator()*r2.getDenomenator() == r1.getDenomenator()*r2.getNumerator();
+	return res;
+}
+
+bool operator!=(Rational const & r1, Rational const & r2) {
+	return !(r1 == r2);
+}
+
+bool operator>(Rational const & r1, Rational const & r2) {
+	return r1.getNumerator()*r2.getDenomenator() > r2.getNumerator()*r1.getDenomenator();
+}
+
+bool operator<(Rational const & r1, Rational const & r2) {
+	return r2 > r1;
+}
+
+bool operator>=(Rational const & r1, Rational const & r2) {
+	return !(r2 > r1);
+}
+
+bool operator<=(Rational const & r1, Rational const & r2) {
+	return !(r1 > r2);
+}
