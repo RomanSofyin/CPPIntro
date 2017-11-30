@@ -145,12 +145,14 @@
   <ItemGroup>
     <ClInclude Include="Rational.h" />
     <ClInclude Include="ScopedPtr.h" />
+    <ClInclude Include="SharedPtr.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rational.cpp" />
     <ClCompile Include="ScopedPtr.cpp" />
+    <ClCompile Include="SharedPtr.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
