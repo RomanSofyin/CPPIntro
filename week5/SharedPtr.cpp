@@ -3,7 +3,7 @@
 #include "SharedPtr.h"
 
 SharedPtr::SharedPtr(Expression *ptr) : ptr(ptr) {
-	nRef = (ptr == NULL) ? NULL : new unsigned(1);
+	nRef = (ptr) ? new unsigned(1) : NULL;
 }
 
 SharedPtr::SharedPtr(const SharedPtr &shp) : ptr(shp.ptr), nRef(shp.nRef) {
@@ -22,8 +22,6 @@ SharedPtr& SharedPtr::operator=(const SharedPtr& shp) {
 	if (this != &shp) {
 		SharedPtr copyThis(shp);
 		copyThis.swap(*this);
-/*		if (copyThis.ptr && *copyThis.nRef == 1)
-			copyThis.~SharedPtr();*/
 	}
 	return *this;
 }
@@ -46,7 +44,6 @@ Expression* SharedPtr::get() const {
 }
 
 void SharedPtr::reset(Expression *ptr) {
-	if (!--(*nRef))
-		delete this->ptr;
-	this->ptr = ptr;
+	SharedPtr shrPtr(ptr);
+	this->swap(shrPtr);
 }
