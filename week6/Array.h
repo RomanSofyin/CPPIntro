@@ -9,30 +9,55 @@ public:
 	//   value типа T. Считайте что у типа T есть
 	//   конструктор, который можно вызвать без
 	//   без параметров, либо он ему не нужен.
-	explicit Array(size_t size = 0, const T& value = T());
+	explicit Array(size_t size = 0, const T& value = T()) : size_(size) {
+		arr_ = new T[size_];
+		for (size_t i = 0; i < size_; i++)
+			*(arr_ + i) = value;
+	}
 
 	//   конструктор копирования, который создает
 	//   копию параметра. Считайте, что для типа
 	//   T определен оператор присваивания.
-	Array(const Array &);
+	Array(const Array & oArr) : size_(oArr.size_) {
+		arr_ = new T[size_];
+		for (size_t i = 0; i < size_; i++)
+			*(arr_ + i) = *(oArr.arr_ + i);
+	}
 
 	//   деструктор, если он вам необходим.
-	~Array();
+	~Array() {
+		delete[] arr_;
+		size_ = 0;
+	}
 
 	//   оператор присваивания.
-	Array& operator=(const Array &);
+	Array& operator=(const Array & oArr) {
+		if (this != &oArr)
+			Array<T>(oArr).swap(*this);
+		return *this;
+	}
 
 	//   возвращает размер массива (количество элементов).
-	size_t size() const;
+	size_t size() const {
+		return size_;
+	}
 
 	//две версии оператора доступа по индексу.
-	T& operator[](size_t);
-	const T& operator[](size_t) const;
+	T& operator[](size_t index) {
+		return *(arr_ + index);
+	}
+
+	const T& operator[](size_t index) const {
+		return *(arr_ + index);
+	}
 
 private:
 	T * arr_;
 	size_t size_;
 
-	void swap(Array & oArr);
+	void swap(Array & oArr) {
+		std::swap(size_, oArr.size_);
+		std::swap(arr_, oArr.arr_);
+	}
 
 };

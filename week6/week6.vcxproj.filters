@@ -35,8 +35,10 @@
     <ClCompile Include="week6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Array.cpp">
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Array.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
+    </Text>
   </ItemGroup>
 </Project>

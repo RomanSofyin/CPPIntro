@@ -1,5 +1,15 @@
-#include "stdafx.h"
-#include "Array.h"
+//#include "stdafx.h"
+//#include "Array.h"
+
+// Two statements below are about overcoming a definition disadvantage
+// of the methods in template classes -
+// declaration and definition should be located in the header file
+template Array<int>;
+template Array<float>;
+// but I don't want to add analoguous statment for each type I'm using with the class,
+// so now I decided not to exploit this .cpp (marked as text) but leave it in the project
+
+
 
 template <typename T>
 Array<T>::Array(size_t size, const T& value) : size_(size) {
@@ -34,8 +44,7 @@ void Array<T>::swap(Array & oArr) {
 	std::swap(arr_, oArr.arr_);
 }
 
-template <typename T>
-size_t Array<T>::size() const {
+template <typename T> size_t Array<T>::size() const {
 	return size_;
 }
 
