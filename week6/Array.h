@@ -10,23 +10,47 @@ public:
 	//   конструктор, который можно вызвать без
 	//   без параметров, либо он ему не нужен.
 	explicit Array(size_t size = 0, const T& value = T()) : size_(size) {
-		arr_ = new T[size_];
+/* 
+   Здесь мы подразумевали, что для типа T определена операция присваивания.
+  		arr_ = new T[size_];
+  		for (size_t i = 0; i < size_; i++)
+  			*(arr_ + i) = value;					// <=> arr_[i] = value;
+  
+   Реализуем аналогичные действия, но без такого предположения.
+ */
+		arr_ = (T*) new char[size_ * sizeof(T)];
 		for (size_t i = 0; i < size_; i++)
-			*(arr_ + i) = value;
+			new (arr_ + i) T(value);						// placement new usage
 	}
 
 	//   конструктор копирования, который создает
 	//   копию параметра. Считайте, что для типа
 	//   T определен оператор присваивания.
 	Array(const Array & oArr) : size_(oArr.size_) {
+/*
+   Здесь мы подразумевали, что для типа T определена операция присваивания.
 		arr_ = new T[size_];
 		for (size_t i = 0; i < size_; i++)
-			*(arr_ + i) = *(oArr.arr_ + i);
+		*(arr_ + i) = *(oArr.arr_ + i);
+  
+   Реализуем аналогичные действия, но без такого предположения.
+ */
+		arr_ = (T*) new char[size_ * sizeof(T)];
+		for (size_t i = 0; i < size_; i++)
+			new (arr_ + i) T(oArr.arr_[i]);			// placement new usage
 	}
 
 	//   деструктор, если он вам необходим.
 	~Array() {
+/*
+   The loop is required in case of placement new usage only
+ */		
+		for (size_t i = 0; i < size_; i++)
+			arr_[i].~T();
+/*
 		delete[] arr_;
+ */
+		delete[](char *)arr_;
 		size_ = 0;
 	}
 
