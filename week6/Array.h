@@ -20,7 +20,7 @@ public:
  */
 		arr_ = (T*) new char[size_ * sizeof(T)];
 		for (size_t i = 0; i < size_; i++)
-			new (arr_ + i) T(value);						// placement new usage
+			new (arr_ + i) T(value);				// placement new usage
 	}
 
 	//   конструктор копирования, который создает
