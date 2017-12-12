@@ -5,6 +5,9 @@ class Any
 private:
 	ICloneable* value;
 
+	void swap(Any & oAny) {
+		std::swap(value, oAny.value);
+	}
 public:
 	// В классе Any должен быть конструктор,
 	// который можно вызвать без параметров,
@@ -22,13 +25,17 @@ public:
 	// Не забудьте про деструктор. Все выделенные
 	// ресурсы нужно освободить.
 	~Any() {
-//		delete (ValueHolder) value;
 		delete value;
 	}
 
 	// В классе Any также должен быть конструктор
 	// копирования (вам поможет метод clone
 	// интерфейса ICloneable)
+	Any(const Any & any) {
+		value = NULL;
+		if (any.value)
+			value = any.value->clone();
+	}
 
 	// В классе должен быть оператор присваивания и/или
 	// шаблонный оператор присваивания, чтобы работал
@@ -36,6 +43,11 @@ public:
 	//    Any copy(i); // copy хранит 10, как и i
 	//    empty = copy; // empty хранит 10, как и copy
 	//    empty = 0; // а теперь empty хранит 0
+	Any & operator=(const Any & any) {
+		if (this != &any)
+			Any(any).swap(*this);
+		return *this;
+	}
 
 	// Ну и наконец, мы хотим уметь получать хранимое
 	// значение, для этого определите в классе Any
@@ -49,7 +61,15 @@ public:
 	//    Any empty2;
 	//    int *p = empty2.cast<int>(); // p == 0
 	// При реализации используйте оператор dynamic_cast.
-	//
+	template <class T>
+	T * cast() {
+		T * res = NULL;
+		ValueHolder<T>* v = dynamic_cast<ValueHolder<T>*>(value);
+		if (v)
+			res = &v->data_;
+		return res;
+	}
+
 	// Допустим у вас есть два наследника класса Base: Derived1 
 	// и Derived2. Кроме того у вас есть указать baseptr
 	// типа Base*. Как проверить указывает ли этот указатель на
