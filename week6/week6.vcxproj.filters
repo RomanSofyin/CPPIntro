@@ -39,6 +39,9 @@
     <ClInclude Include="Any.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SameTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
